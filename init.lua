@@ -726,6 +726,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       -- nixd is installed via nix not via mason
       ensure_installed = vim.tbl_filter(function(name)
@@ -790,6 +791,9 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         nix = { 'nixfmt' },
+        typescript = { 'prettier' },
+        javascript = { 'prettier' },
+        typescriptreact = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
