@@ -698,6 +698,14 @@ require('lazy').setup({
             },
           },
         },
+
+        nixd = {
+          settings = {
+            nixd = {
+              formatting = { command = { 'nixfmt' } },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -717,6 +725,10 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+      -- nixd is installed via nix not via mason
+      ensure_installed = vim.tbl_filter(function(name)
+        return name ~= 'nixd'
+      end, ensure_installed)
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -733,6 +745,12 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- nixd isn't a mason package, setting it up manually
+      local nixd_config = servers.nixd or {}
+      nixd_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, nixd_config.capabilities or {})
+      vim.lsp.config('nixd', nixd_config)
+      vim.lsp.enable 'nixd'
     end,
   },
 
@@ -768,6 +786,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        nix = { 'nixfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
