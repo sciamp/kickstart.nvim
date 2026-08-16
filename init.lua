@@ -708,6 +708,8 @@ require('lazy').setup({
         },
 
         ts_ls = {},
+
+        rust_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -794,6 +796,7 @@ require('lazy').setup({
         typescript = { 'prettier' },
         javascript = { 'prettier' },
         typescriptreact = { 'prettier' },
+        rust = { 'rustfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
