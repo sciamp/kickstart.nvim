@@ -712,6 +712,8 @@ require('lazy').setup({
         rust_analyzer = {},
 
         elixirls = {},
+
+        gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -731,6 +733,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'prettier',
+        'goimports',
       })
       -- nixd is installed via nix not via mason
       ensure_installed = vim.tbl_filter(function(name)
@@ -800,6 +803,7 @@ require('lazy').setup({
         typescriptreact = { 'prettier' },
         rust = { 'rustfmt' },
         elixir = { 'mix' },
+        go = { 'gimports', 'gofmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1000,7 +1004,26 @@ require('lazy').setup({
     -- opts = {
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'elixir', 'heex', 'eex' },
+        ensure_installed = {
+          'bash',
+          'c',
+          'diff',
+          'html',
+          'lua',
+          'luadoc',
+          'markdown',
+          'markdown_inline',
+          'query',
+          'vim',
+          'vimdoc',
+          'elixir',
+          'heex',
+          'eex',
+          'go',
+          'gomod',
+          'gowork',
+          'gosum',
+        },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = {
