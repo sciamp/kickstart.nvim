@@ -714,6 +714,8 @@ require('lazy').setup({
         elixirls = {},
 
         gopls = {},
+
+        clangd = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -734,6 +736,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'prettier',
         'goimports',
+        'clang-format',
       })
       -- nixd is installed via nix not via mason
       ensure_installed = vim.tbl_filter(function(name)
@@ -804,6 +807,7 @@ require('lazy').setup({
         rust = { 'rustfmt' },
         elixir = { 'mix' },
         go = { 'gimports', 'gofmt' },
+        c = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
