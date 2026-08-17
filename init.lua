@@ -1145,6 +1145,8 @@ require('lazy').setup({
 -- securely load project-local .nvim.lua if it exists
 vim.opt.exrc = false -- disable legacy .exrc for security
 
+vim.opt.relativenumber = true
+
 local local_config = vim.fn.getcwd() .. '/.nvim.lua'
 if vim.fn.filereadable(local_config) == 1 then
   vim.cmd('source ' .. local_config)
